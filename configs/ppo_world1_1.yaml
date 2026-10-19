@@ -1,0 +1,48 @@
+# PPO on Super Mario Bros World 1-1, pixels-only.
+#
+# Defaults are grounded in the prior research pass and common Mario-PPO setups
+# (Atari-style preprocessing. gamma 0.9 because Mario's shaped reward is dense and
+# fairly short-horizon, so heavy discounting of the far future helps). Tune freely.
+#
+# Tip: to start experiments on the easier action space, set action_set: RIGHT_ONLY.
+
+env:
+  env_id: "SuperMarioBros-1-1-v0"   # stage-specific, full-RGB (-v0) build for pixels
+  action_set: "SIMPLE_MOVEMENT"     # RIGHT_ONLY | SIMPLE_MOVEMENT | COMPLEX_MOVEMENT
+  n_envs: 12                        # parallel SubprocVecEnv workers (15-core machine)
+  frame_skip: 4                     # action-repeat
+  frame_stack: 4                    # temporal context for velocity
+  reward_scale: 1.0                 # env already ships a shaped reward in [-15, 15]
+  reward_clip: null                 # e.g. 15.0 to hard-clip. null = leave as-is
+  use_subproc: true
+
+ppo:
+  n_steps: 512                      # rollout length per env (512 * 12 = 6144 / update)
+  batch_size: 256
+  n_epochs: 4
+  gamma: 0.9
+  gae_lambda: 0.95
+  learning_rate: 0.00025
+  lr_linear_decay: true             # decay LR linearly to 0 over training
+  clip_range: 0.2
+  clip_range_linear_decay: false
+  ent_coef: 0.01                    # exploration bonus
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  total_timesteps: 5000000          # ~1-5M frames is the World 1-1 ballpark
+
+intrinsic:
+  use_intrinsic: false              # set true to add RND curiosity reward
+  method: "rnd"                     # only "rnd" implemented
+  intrinsic_coef: 0.5
+  lr: 0.0001
+  feature_dim: 512
+  update_proportion: 1.0
+
+run:
+  seed: 0
+  log_dir: "runs/ppo_world1_1"
+  checkpoint_freq: 100000           # total env steps between checkpoints
+  eval_freq: 100000                 # total env steps between evaluations
+  n_eval_episodes: 5
+  device: "auto"                    # auto | cpu | cuda

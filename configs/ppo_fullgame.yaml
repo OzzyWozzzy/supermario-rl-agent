@@ -1,0 +1,56 @@
+# Human-like PPO on the FULL GAME (continuous playthrough).
+#
+# env_id "SuperMarioBros-v0" (no level suffix) plays all stages in sequence: the agent
+# starts at 1-1 and, on clearing a stage, the SAME episode continues into 1-2, 1-3, ...
+# Warm-started from the 1-1 specialist so it can clear 1-1 and actually reach 1-2+ to
+# practice them (mitigates the curriculum/sparse-practice problem of deep levels).
+#
+# Human-like objective: humanlike reward (score/coins/powerups) + RND curiosity, so it
+# explores game elements and collects points, not just speedruns.
+
+env:
+  env_id: "SuperMarioBros-v0"   # full game, continuous stage progression
+  action_set: "SIMPLE_MOVEMENT"
+  n_envs: 12
+  frame_skip: 4
+  frame_stack: 4
+  reward_scale: 0.4         # dampen the base "rush to flag" reward so exploring competes
+  reward_clip: null
+  use_subproc: true
+  humanlike: true
+  score_coef: 0.01
+  coin_coef: 75.0           # push coin collection hard (get ALL the coins)
+  powerup_coef: 20.0        # reward interacting with features (mushrooms/fire flowers)
+  coverage: true            # Go-Explore-style: reward covering new cells of the level
+  coverage_coef: 1.0        # stronger exploration / feature-seeking (was 0.5)
+
+ppo:
+  n_steps: 512
+  batch_size: 256
+  n_epochs: 4
+  gamma: 0.9
+  gae_lambda: 0.95
+  learning_rate: 0.00025
+  lr_linear_decay: true
+  clip_range: 0.2
+  clip_range_linear_decay: false
+  ent_coef: 0.03            # a bit more behavioral exploration
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  total_timesteps: 10000000      # full game is bigger. give it more budget
+
+intrinsic:
+  use_intrinsic: true
+  method: "rnd"
+  intrinsic_coef: 0.3
+  lr: 0.0001
+  feature_dim: 512
+  update_proportion: 1.0
+
+run:
+  seed: 0
+  log_dir: "runs/ppo_fullgame"
+  checkpoint_freq: 100000
+  eval_freq: 100000
+  n_eval_episodes: 5
+  device: "auto"

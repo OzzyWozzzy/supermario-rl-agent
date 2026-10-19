@@ -1,0 +1,28 @@
+[project]
+name = "mario-pixel-rl"
+version = "0.1.0"
+description = "Visual PPO with curiosity and collection rewards for Super Mario Bros."
+readme = "README.md"
+requires-python = ">=3.13"
+dynamic = ["dependencies"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[project.optional-dependencies]
+dev = ["ruff>=0.12,<1"]
+analysis = ["matplotlib>=3.10,<4"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

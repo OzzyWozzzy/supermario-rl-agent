@@ -1,0 +1,7 @@
+checkpoint,policy_mode,episodes,reached_stage_1_2,episodes_with_clear,furthest_level,maximum_game_score,saved_training_transitions
+fullgame_1_6m,deterministic,3,0,0,1-1,2800,1599936
+fullgame_1_6m,stochastic,10,4,4,1-2,28050,1599936
+fullgame_best,deterministic,3,3,3,1-2,21700,2899884
+fullgame_best,stochastic,10,6,6,1-2,27650,2899884
+explore_best,deterministic,3,0,0,1-1,1700,599976
+explore_best,stochastic,10,0,0,1-1,2100,599976

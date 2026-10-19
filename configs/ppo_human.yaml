@@ -1,0 +1,54 @@
+# PPO on Super Mario Bros 1-1, "play like a human": explore game elements + score.
+#
+# Differences vs ppo_world1_1.yaml:
+#   - env.humanlike: true  -> reward score gains, coins, and power-ups on top of the
+#     base reward, so the agent is paid for hitting ?-blocks, grabbing coins, stomping
+#     enemies, and taking mushrooms/fire-flowers (not just rushing right).
+#   - intrinsic.use_intrinsic: true -> RND curiosity bonus drives exploration of novel
+#     game states/elements.
+#   - higher ent_coef -> more behavioral exploration (breaks the pure "run right" habit).
+
+env:
+  env_id: "SuperMarioBros-1-1-v0"
+  action_set: "SIMPLE_MOVEMENT"
+  n_envs: 12
+  frame_skip: 4
+  frame_stack: 4
+  reward_scale: 1.0
+  reward_clip: null
+  use_subproc: true
+  humanlike: true        # +score / +coins / +powerups reward shaping
+  score_coef: 0.01       # weight on per-step score gain (score is large)
+  coin_coef: 2.0         # extra reward per coin collected
+  powerup_coef: 10.0     # reward for small->tall->fireball power-ups
+
+ppo:
+  n_steps: 512
+  batch_size: 256
+  n_epochs: 4
+  gamma: 0.9
+  gae_lambda: 0.95
+  learning_rate: 0.00025
+  lr_linear_decay: true
+  clip_range: 0.2
+  clip_range_linear_decay: false
+  ent_coef: 0.02         # raised: encourage exploring elements, not just speedrunning
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  total_timesteps: 5000000
+
+intrinsic:
+  use_intrinsic: true    # RND curiosity -> seek novel game states/elements
+  method: "rnd"
+  intrinsic_coef: 0.3
+  lr: 0.0001
+  feature_dim: 512
+  update_proportion: 1.0
+
+run:
+  seed: 0
+  log_dir: "runs/ppo_human"
+  checkpoint_freq: 100000
+  eval_freq: 100000
+  n_eval_episodes: 5
+  device: "auto"

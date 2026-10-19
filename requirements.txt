@@ -1,0 +1,33 @@
+# Working, verified stack for pixels-only Mario RL (Gymnasium-native).
+#
+# Version reasoning (see README "Setup"):
+#   - nes-py>=9 and gym-super-mario-bros>=9 are Gymnasium-native (2-tuple reset,
+#     5-tuple step). JoypadSpace is itself a gymnasium.Wrapper, so NO Shimmy or
+#     classic-gym shim is needed.
+#   - Stable-Baselines3 2.x is the matching Gymnasium-era SB3 line.
+#   - Requires Python >= 3.13 (nes-py / gym-super-mario-bros 9.x require it).
+#   - On Apple Silicon, nes-py has no prebuilt arm64 wheel and compiles from
+#     source; a working C/C++ toolchain (Xcode Command Line Tools) is required.
+#
+# These pins are the exact versions verified end-to-end (train -> eval -> video).
+
+# --- core RL env stack (Gymnasium API) ---
+gymnasium==1.3.0
+nes-py==9.0.1
+gym-super-mario-bros==9.1.0
+
+# --- learning ---
+stable-baselines3==2.9.0
+torch==2.12.1
+
+# --- perception / utilities ---
+numpy==2.5.0
+opencv-python==4.13.0.92
+pyyaml==6.0.3
+
+# --- logging / progress / video ---
+tensorboard==2.21.0
+tqdm==4.68.3
+rich==15.0.0
+imageio==2.37.3
+imageio-ffmpeg==0.6.0

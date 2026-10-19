@@ -1,0 +1,5 @@
+method,seed,transitions,training_seconds,extrinsic_return,any_stage_cleared,max_game_score,max_x_pos,agent_steps
+ppo,0,2048,9.699616958154365,250.0,0.0,0.0,314.0,30.0
+ppo_rnd,0,2048,12.36863312497735,231.0,0.0,0.0,296.0,40.0
+ppo_rnd,1,2048,12.758537499932572,231.0,0.0,0.0,296.0,40.0
+ppo,1,2048,9.859949624864385,231.0,0.0,0.0,296.0,40.0

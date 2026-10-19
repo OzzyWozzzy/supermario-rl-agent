@@ -1,0 +1,47 @@
+# Human-like PPO on Super Mario Bros 1-2 (same objective as ppo_human.yaml).
+# Runs in PARALLEL with the 1-1 human run, so n_envs is reduced to share the cores.
+
+env:
+  env_id: "SuperMarioBros-1-2-v0"
+  action_set: "SIMPLE_MOVEMENT"
+  n_envs: 6                # reduced: shares the 15-core machine with the 1-1 run
+  frame_skip: 4
+  frame_stack: 4
+  reward_scale: 1.0
+  reward_clip: null
+  use_subproc: true
+  humanlike: true
+  score_coef: 0.01
+  coin_coef: 2.0
+  powerup_coef: 10.0
+
+ppo:
+  n_steps: 512
+  batch_size: 256
+  n_epochs: 4
+  gamma: 0.9
+  gae_lambda: 0.95
+  learning_rate: 0.00025
+  lr_linear_decay: true
+  clip_range: 0.2
+  clip_range_linear_decay: false
+  ent_coef: 0.02
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  total_timesteps: 5000000
+
+intrinsic:
+  use_intrinsic: true
+  method: "rnd"
+  intrinsic_coef: 0.3
+  lr: 0.0001
+  feature_dim: 512
+  update_proportion: 1.0
+
+run:
+  seed: 0
+  log_dir: "runs/ppo_world1_2"
+  checkpoint_freq: 100000
+  eval_freq: 100000
+  n_eval_episodes: 5
+  device: "auto"

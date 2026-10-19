@@ -1,0 +1,54 @@
+# Human-like FULL-GAME exploration agent with full directional control.
+#
+# Key difference vs ppo_fullgame.yaml: action_set COMPLEX_MOVEMENT (12 actions) so the
+# agent can jump while moving LEFT, go DOWN pipes, and climb UP vines — i.e. actually
+# "go up and look left and right" to find coins/secret rooms, not just run right.
+# Warm-started by partial weight transfer (--transfer-from) from the 7-action model so
+# it keeps the learned vision and only relearns the action head for the new moves.
+
+env:
+  env_id: "SuperMarioBros-v0"     # full game, continuous stages
+  action_set: "COMPLEX_MOVEMENT"  # NOOP, right(+A/B), A, left(+A/B), down, up
+  n_envs: 12
+  frame_skip: 4
+  frame_stack: 4
+  reward_scale: 0.4               # rush dampened so exploring competes
+  reward_clip: null
+  use_subproc: true
+  humanlike: true
+  score_coef: 0.01
+  coin_coef: 75.0                 # get ALL the coins
+  powerup_coef: 20.0              # interact with features
+  coverage: true                  # Go-Explore cell coverage (rewards new x AND y cells)
+  coverage_coef: 1.0              # strong exploration, incl. vertical (up) and backtracking
+
+ppo:
+  n_steps: 512
+  batch_size: 256
+  n_epochs: 4
+  gamma: 0.9
+  gae_lambda: 0.95
+  learning_rate: 0.00025
+  lr_linear_decay: true
+  clip_range: 0.2
+  clip_range_linear_decay: false
+  ent_coef: 0.03
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+  total_timesteps: 10000000
+
+intrinsic:
+  use_intrinsic: true
+  method: "rnd"
+  intrinsic_coef: 0.3
+  lr: 0.0001
+  feature_dim: 512
+  update_proportion: 1.0
+
+run:
+  seed: 0
+  log_dir: "runs/ppo_explore"
+  checkpoint_freq: 100000
+  eval_freq: 100000
+  n_eval_episodes: 5
+  device: "auto"

@@ -1,0 +1,562 @@
+{
+  "kind": "pilot",
+  "created_utc": "2026-10-09T05:43:06.777725+00:00",
+  "evaluation_episodes": 3,
+  "checkpoint_selection": "final",
+  "aggregates": [
+    {
+      "method": "ppo",
+      "training_seeds": 2,
+      "mean_extrinsic_return": 240.5,
+      "std_extrinsic_return": 13.435028842544403,
+      "mean_any_stage_cleared": 0.0,
+      "std_any_stage_cleared": 0.0,
+      "mean_max_game_score": 0.0,
+      "std_max_game_score": 0.0,
+      "mean_max_x_pos": 305.0,
+      "std_max_x_pos": 12.727922061357855,
+      "mean_agent_steps": 35.0,
+      "std_agent_steps": 7.0710678118654755,
+      "mean_training_seconds": 9.779783291509375,
+      "std_training_seconds": 0.11337231587637714
+    },
+    {
+      "method": "ppo_rnd",
+      "training_seeds": 2,
+      "mean_extrinsic_return": 231.0,
+      "std_extrinsic_return": 0.0,
+      "mean_any_stage_cleared": 0.0,
+      "std_any_stage_cleared": 0.0,
+      "mean_max_game_score": 0.0,
+      "std_max_game_score": 0.0,
+      "mean_max_x_pos": 296.0,
+      "std_max_x_pos": 0.0,
+      "mean_agent_steps": 40.0,
+      "std_agent_steps": 0.0,
+      "mean_training_seconds": 12.563585312454961,
+      "std_training_seconds": 0.27570402754513973
+    }
+  ],
+  "runs": [
+    {
+      "summary": {
+        "method": "ppo",
+        "seed": 0,
+        "transitions": 2048,
+        "training_seconds": 9.699616958154365,
+        "extrinsic_return": 250.0,
+        "any_stage_cleared": 0.0,
+        "max_game_score": 0.0,
+        "max_x_pos": 314.0,
+        "agent_steps": 30.0
+      },
+      "episodes": [
+        {
+          "episode": 1,
+          "seed": 10000,
+          "extrinsic_return": 250.0,
+          "agent_steps": 30,
+          "max_x_pos": 314,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 2,
+          "seed": 10001,
+          "extrinsic_return": 250.0,
+          "agent_steps": 30,
+          "max_x_pos": 314,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 3,
+          "seed": 10002,
+          "extrinsic_return": 250.0,
+          "agent_steps": 30,
+          "max_x_pos": 314,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        }
+      ],
+      "curve": [
+        {
+          "transitions": 1024,
+          "extrinsic_return": 250.0
+        },
+        {
+          "transitions": 2048,
+          "extrinsic_return": 250.0
+        }
+      ],
+      "config": {
+        "env": {
+          "env_id": "SuperMarioBros-1-1-v0",
+          "action_set": "SIMPLE_MOVEMENT",
+          "n_envs": 2,
+          "frame_skip": 4,
+          "frame_stack": 4,
+          "reward_scale": 1.0,
+          "reward_clip": null,
+          "use_subproc": false,
+          "humanlike": false,
+          "score_coef": 0.01,
+          "coin_coef": 2.0,
+          "powerup_coef": 10.0,
+          "coverage": false,
+          "coverage_coef": 0.5
+        },
+        "ppo": {
+          "n_steps": 64,
+          "batch_size": 64,
+          "n_epochs": 2,
+          "gamma": 0.9,
+          "gae_lambda": 0.95,
+          "learning_rate": 0.00025,
+          "lr_linear_decay": true,
+          "clip_range": 0.2,
+          "clip_range_linear_decay": false,
+          "ent_coef": 0.01,
+          "vf_coef": 0.5,
+          "max_grad_norm": 0.5,
+          "total_timesteps": 2048
+        },
+        "intrinsic": {
+          "use_intrinsic": false,
+          "method": "rnd",
+          "intrinsic_coef": 0.5,
+          "lr": 0.0001,
+          "feature_dim": 512,
+          "update_proportion": 1.0
+        },
+        "run": {
+          "seed": 0,
+          "checkpoint_freq": 1024,
+          "eval_freq": 1024,
+          "n_eval_episodes": 3,
+          "device": "auto"
+        }
+      },
+      "provenance": {
+        "python": "3.13.14",
+        "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+        "device": "cpu",
+        "versions": {
+          "torch": "2.12.1",
+          "stable-baselines3": "2.9.0",
+          "gymnasium": "1.3.0",
+          "nes-py": "9.0.1",
+          "gym-super-mario-bros": "9.1.0",
+          "numpy": "2.5.0"
+        },
+        "git_commit": null,
+        "git_dirty": null
+      }
+    },
+    {
+      "summary": {
+        "method": "ppo_rnd",
+        "seed": 0,
+        "transitions": 2048,
+        "training_seconds": 12.36863312497735,
+        "extrinsic_return": 231.0,
+        "any_stage_cleared": 0.0,
+        "max_game_score": 0.0,
+        "max_x_pos": 296.0,
+        "agent_steps": 40.0
+      },
+      "episodes": [
+        {
+          "episode": 1,
+          "seed": 10000,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 2,
+          "seed": 10001,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 3,
+          "seed": 10002,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        }
+      ],
+      "curve": [
+        {
+          "transitions": 1024,
+          "extrinsic_return": 252.0
+        },
+        {
+          "transitions": 2048,
+          "extrinsic_return": 231.0
+        }
+      ],
+      "config": {
+        "env": {
+          "env_id": "SuperMarioBros-1-1-v0",
+          "action_set": "SIMPLE_MOVEMENT",
+          "n_envs": 2,
+          "frame_skip": 4,
+          "frame_stack": 4,
+          "reward_scale": 1.0,
+          "reward_clip": null,
+          "use_subproc": false,
+          "humanlike": false,
+          "score_coef": 0.01,
+          "coin_coef": 2.0,
+          "powerup_coef": 10.0,
+          "coverage": false,
+          "coverage_coef": 0.5
+        },
+        "ppo": {
+          "n_steps": 64,
+          "batch_size": 64,
+          "n_epochs": 2,
+          "gamma": 0.9,
+          "gae_lambda": 0.95,
+          "learning_rate": 0.00025,
+          "lr_linear_decay": true,
+          "clip_range": 0.2,
+          "clip_range_linear_decay": false,
+          "ent_coef": 0.01,
+          "vf_coef": 0.5,
+          "max_grad_norm": 0.5,
+          "total_timesteps": 2048
+        },
+        "intrinsic": {
+          "use_intrinsic": true,
+          "method": "rnd",
+          "intrinsic_coef": 0.5,
+          "lr": 0.0001,
+          "feature_dim": 512,
+          "update_proportion": 1.0
+        },
+        "run": {
+          "seed": 0,
+          "checkpoint_freq": 1024,
+          "eval_freq": 1024,
+          "n_eval_episodes": 3,
+          "device": "auto"
+        }
+      },
+      "provenance": {
+        "python": "3.13.14",
+        "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+        "device": "cpu",
+        "versions": {
+          "torch": "2.12.1",
+          "stable-baselines3": "2.9.0",
+          "gymnasium": "1.3.0",
+          "nes-py": "9.0.1",
+          "gym-super-mario-bros": "9.1.0",
+          "numpy": "2.5.0"
+        },
+        "git_commit": null,
+        "git_dirty": null
+      }
+    },
+    {
+      "summary": {
+        "method": "ppo_rnd",
+        "seed": 1,
+        "transitions": 2048,
+        "training_seconds": 12.758537499932572,
+        "extrinsic_return": 231.0,
+        "any_stage_cleared": 0.0,
+        "max_game_score": 0.0,
+        "max_x_pos": 296.0,
+        "agent_steps": 40.0
+      },
+      "episodes": [
+        {
+          "episode": 1,
+          "seed": 10001,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 2,
+          "seed": 10002,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 3,
+          "seed": 10003,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        }
+      ],
+      "curve": [
+        {
+          "transitions": 1024,
+          "extrinsic_return": 231.0
+        },
+        {
+          "transitions": 2048,
+          "extrinsic_return": 231.0
+        }
+      ],
+      "config": {
+        "env": {
+          "env_id": "SuperMarioBros-1-1-v0",
+          "action_set": "SIMPLE_MOVEMENT",
+          "n_envs": 2,
+          "frame_skip": 4,
+          "frame_stack": 4,
+          "reward_scale": 1.0,
+          "reward_clip": null,
+          "use_subproc": false,
+          "humanlike": false,
+          "score_coef": 0.01,
+          "coin_coef": 2.0,
+          "powerup_coef": 10.0,
+          "coverage": false,
+          "coverage_coef": 0.5
+        },
+        "ppo": {
+          "n_steps": 64,
+          "batch_size": 64,
+          "n_epochs": 2,
+          "gamma": 0.9,
+          "gae_lambda": 0.95,
+          "learning_rate": 0.00025,
+          "lr_linear_decay": true,
+          "clip_range": 0.2,
+          "clip_range_linear_decay": false,
+          "ent_coef": 0.01,
+          "vf_coef": 0.5,
+          "max_grad_norm": 0.5,
+          "total_timesteps": 2048
+        },
+        "intrinsic": {
+          "use_intrinsic": true,
+          "method": "rnd",
+          "intrinsic_coef": 0.5,
+          "lr": 0.0001,
+          "feature_dim": 512,
+          "update_proportion": 1.0
+        },
+        "run": {
+          "seed": 1,
+          "checkpoint_freq": 1024,
+          "eval_freq": 1024,
+          "n_eval_episodes": 3,
+          "device": "auto"
+        }
+      },
+      "provenance": {
+        "python": "3.13.14",
+        "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+        "device": "cpu",
+        "versions": {
+          "torch": "2.12.1",
+          "stable-baselines3": "2.9.0",
+          "gymnasium": "1.3.0",
+          "nes-py": "9.0.1",
+          "gym-super-mario-bros": "9.1.0",
+          "numpy": "2.5.0"
+        },
+        "git_commit": null,
+        "git_dirty": null
+      }
+    },
+    {
+      "summary": {
+        "method": "ppo",
+        "seed": 1,
+        "transitions": 2048,
+        "training_seconds": 9.859949624864385,
+        "extrinsic_return": 231.0,
+        "any_stage_cleared": 0.0,
+        "max_game_score": 0.0,
+        "max_x_pos": 296.0,
+        "agent_steps": 40.0
+      },
+      "episodes": [
+        {
+          "episode": 1,
+          "seed": 10001,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 2,
+          "seed": 10002,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        },
+        {
+          "episode": 3,
+          "seed": 10003,
+          "extrinsic_return": 231.0,
+          "agent_steps": 40,
+          "max_x_pos": 296,
+          "any_stage_cleared": false,
+          "stages_cleared": 0,
+          "furthest_world": 1,
+          "furthest_stage": 1,
+          "max_game_score": 0,
+          "coins_collected": 0,
+          "coverage_cells": 0
+        }
+      ],
+      "curve": [
+        {
+          "transitions": 1024,
+          "extrinsic_return": 231.0
+        },
+        {
+          "transitions": 2048,
+          "extrinsic_return": 231.0
+        }
+      ],
+      "config": {
+        "env": {
+          "env_id": "SuperMarioBros-1-1-v0",
+          "action_set": "SIMPLE_MOVEMENT",
+          "n_envs": 2,
+          "frame_skip": 4,
+          "frame_stack": 4,
+          "reward_scale": 1.0,
+          "reward_clip": null,
+          "use_subproc": false,
+          "humanlike": false,
+          "score_coef": 0.01,
+          "coin_coef": 2.0,
+          "powerup_coef": 10.0,
+          "coverage": false,
+          "coverage_coef": 0.5
+        },
+        "ppo": {
+          "n_steps": 64,
+          "batch_size": 64,
+          "n_epochs": 2,
+          "gamma": 0.9,
+          "gae_lambda": 0.95,
+          "learning_rate": 0.00025,
+          "lr_linear_decay": true,
+          "clip_range": 0.2,
+          "clip_range_linear_decay": false,
+          "ent_coef": 0.01,
+          "vf_coef": 0.5,
+          "max_grad_norm": 0.5,
+          "total_timesteps": 2048
+        },
+        "intrinsic": {
+          "use_intrinsic": false,
+          "method": "rnd",
+          "intrinsic_coef": 0.5,
+          "lr": 0.0001,
+          "feature_dim": 512,
+          "update_proportion": 1.0
+        },
+        "run": {
+          "seed": 1,
+          "checkpoint_freq": 1024,
+          "eval_freq": 1024,
+          "n_eval_episodes": 3,
+          "device": "auto"
+        }
+      },
+      "provenance": {
+        "python": "3.13.14",
+        "platform": "macOS-26.5.1-arm64-arm-64bit-Mach-O",
+        "device": "cpu",
+        "versions": {
+          "torch": "2.12.1",
+          "stable-baselines3": "2.9.0",
+          "gymnasium": "1.3.0",
+          "nes-py": "9.0.1",
+          "gym-super-mario-bros": "9.1.0",
+          "numpy": "2.5.0"
+        },
+        "git_commit": null,
+        "git_dirty": null
+      }
+    }
+  ]
+}
